@@ -22,8 +22,9 @@
   }
 
   .video-container {
-    @apply relative w-full max-w-sm mx-auto bg-black rounded-xl overflow-hidden;
+    @apply relative w-full max-w-md mx-auto bg-black rounded-xl overflow-hidden shadow-lg;
     aspect-ratio: 9/16;
+    min-height: 400px;
   }
 
   .caption-overlay {
@@ -39,5 +40,17 @@
 @layer utilities {
   .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
+@keyframes indeterminate-progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }

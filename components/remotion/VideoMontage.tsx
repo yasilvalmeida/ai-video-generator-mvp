@@ -78,7 +78,9 @@ export const VideoMontage: React.FC<VideoMontageProps> = ({
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
+                objectFit: 'contain',
+                objectPosition: 'center',
+                backgroundColor: '#000',
               }}
             />
           )}
@@ -94,7 +96,9 @@ export const VideoMontage: React.FC<VideoMontageProps> = ({
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
+                objectFit: 'contain',
+                objectPosition: 'center',
+                backgroundColor: '#000',
               }}
             />
           )}
@@ -102,12 +106,7 @@ export const VideoMontage: React.FC<VideoMontageProps> = ({
       </Sequence>
 
       {/* Captions Overlay */}
-      <CaptionOverlay
-        captions={captions}
-        currentFrame={frame}
-        fps={fps}
-        scale={captionScale}
-      />
+      <CaptionOverlay captions={captions} />
     </AbsoluteFill>
   );
 };

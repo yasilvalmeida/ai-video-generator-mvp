@@ -1,4 +1,6 @@
 import OpenAI from 'openai';
+import fs from 'fs';
+import path from 'path';
 
 // Initialize OpenAI client
 let openai: OpenAI | null = null;
@@ -25,47 +27,24 @@ export interface TranscriptionResponse {
   language?: string;
 }
 
-export async function transcribeAudio(
-  audioFile: File
-): Promise<TranscriptionResponse> {
+export async function transcribeAudio(file: File): Promise<any> {
+  const client = getOpenAIClient();
+
+  if (!client) {
+    throw new Error('OpenAI client not initialized');
+  }
+
   try {
-    const client = getOpenAIClient();
-    if (!client) {
-      throw new Error(
-        'OpenAI API is not configured. Please add OPENAI_API_KEY to your environment variables.'
-      );
-    }
-
-    // Convert File to Buffer for OpenAI API
-    const arrayBuffer = await audioFile.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    const transcription = await client.audio.transcriptions.create({
-      file: new File([buffer], audioFile.name, { type: audioFile.type }),
+    const response = await client.audio.transcriptions.create({
+      file: file,
       model: 'whisper-1',
       response_format: 'verbose_json',
       timestamp_granularities: ['word'],
     });
 
-    // Extract segments from the response
-    const segments =
-      transcription.segments?.map((segment, index) => ({
-        id: index,
-        start: segment.start,
-        end: segment.end,
-        text: segment.text,
-      })) || [];
-
-    return {
-      text: transcription.text,
-      segments,
-      language: transcription.language,
-    };
+    return response;
   } catch (error) {
-    console.error('Error transcribing audio:', error);
-    throw new Error(
-      error instanceof Error ? error.message : 'Failed to transcribe audio'
-    );
+    throw new Error(`Transcription failed: ${error}`);
   }
 }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { VideoProvider } from '@/contexts/VideoContext';
 
 export const metadata: Metadata = {
   title: 'Video Generator MVP',
@@ -23,7 +24,9 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <div data-has-api-keys={hasApiKeys.toString()}>{children}</div>
+        <VideoProvider>
+          <div data-has-api-keys={hasApiKeys.toString()}>{children}</div>
+        </VideoProvider>
       </body>
     </html>
   );

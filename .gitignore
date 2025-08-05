@@ -3,9 +3,6 @@ node_modules/
 /.pnp
 .pnp.js
 
-# Testing
-/coverage
-
 # Next.js
 /.next/
 /out/
@@ -53,15 +50,11 @@ pids
 *.seed
 *.pid.lock
 
-# Coverage directory used by tools like istanbul
+# Coverage directory
 coverage/
 
 # nyc test coverage
 .nyc_output
-
-# Dependency directories
-node_modules/
-jspm_packages/
 
 # Optional npm cache directory
 .npm
@@ -80,12 +73,9 @@ jspm_packages/
 .env.test
 .env.production
 
-# parcel-bundler cache (https://parceljs.org/)
+# parcel-bundler cache
 .cache
 .parcel-cache
-
-# next.js build output
-.next
 
 # nuxt.js build output
 .nuxt

@@ -4,7 +4,14 @@ import { generateAIVideo } from '@/lib/replicate';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { prompt, duration = 5, fps = 30 } = body;
+    const {
+      prompt,
+      duration = 5,
+      fps = 30,
+      width = 1080,
+      height = 1920,
+      model = 'zeroscope',
+    } = body;
 
     if (!prompt) {
       return NextResponse.json(
@@ -17,6 +24,9 @@ export async function POST(request: NextRequest) {
       prompt,
       duration,
       fps,
+      width,
+      height,
+      model,
     });
 
     return NextResponse.json(result);

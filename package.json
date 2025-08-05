@@ -7,35 +7,35 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
     "remotion": "remotion",
     "remotion:preview": "remotion preview",
     "remotion:render": "remotion render"
   },
   "dependencies": {
+    "@remotion/bundler": "^4.0.331",
+    "@remotion/player": "^4.0.0",
+    "@remotion/renderer": "^4.0.0",
+    "autoprefixer": "^10.4.16",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "dotenv": "^17.2.1",
+    "form-data": "^4.0.4",
+    "lucide-react": "^0.294.0",
     "next": "14.0.4",
+    "openai": "^4.20.1",
+    "postcss": "^8.4.32",
     "react": "^18",
     "react-dom": "^18",
     "remotion": "^4.0.0",
-    "@remotion/player": "^4.0.0",
-    "@remotion/renderer": "^4.0.0",
-    "tailwindcss": "^3.3.0",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32",
     "replicate": "^0.22.0",
-    "openai": "^4.20.1",
-    "lucide-react": "^0.294.0",
-    "clsx": "^2.0.0",
-    "class-variance-authority": "^0.7.0"
+    "tailwindcss": "^3.3.0"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
-    "jest": "^29.7.0",
-    "@types/jest": "^29.5.8"
+    "typescript": "^5"
   }
 }
