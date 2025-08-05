@@ -297,8 +297,39 @@ export default function HomePage() {
             </div>
           )}
 
-          {/* Preview - Show immediately after video upload */}
-          {state.selectedFile && (
+          {/* Original Video Preview - Show during processing */}
+          {state.selectedFile && state.captions.length === 0 && (
+            <div className='rounded-xl border border-gray-200 bg-white p-6 shadow-sm'>
+              <h2 className='mb-4 text-xl font-semibold text-gray-900'>
+                Original Video Preview
+              </h2>
+              <p className='text-sm text-gray-600 mb-4'>
+                Your video is ready. Select a hook template and click "Generate
+                Video" to add AI-generated captions.
+              </p>
+              {(() => {
+                const videoUrl = videoBlobUrl || state.renderedMontageUrl;
+
+                return (
+                  <div className='w-full max-w-md mx-auto'>
+                    <div className='video-container'>
+                      <video
+                        src={videoUrl}
+                        className='w-full h-full object-contain bg-black'
+                        controls
+                        playsInline
+                        preload='metadata'
+                        crossOrigin='anonymous'
+                      />
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          )}
+
+          {/* Preview - Show only when captions are available */}
+          {state.selectedFile && state.captions.length > 0 && (
             <div className='rounded-xl border border-gray-200 bg-white p-6 shadow-sm'>
               <h2 className='mb-4 text-xl font-semibold text-gray-900'>
                 Video Preview with Captions

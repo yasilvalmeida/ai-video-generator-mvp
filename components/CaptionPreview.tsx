@@ -100,15 +100,15 @@ export const CaptionPreview: React.FC<CaptionPreviewProps> = ({
   };
 
   return (
-    <div className='w-full max-w-md mx-auto'>
+    <div className='mx-auto w-full max-w-md'>
       <div className='video-container'>
         {!videoUrl && (
-          <div className='text-white p-4'>No video URL provided</div>
+          <div className='p-4 text-white'>No video URL provided</div>
         )}
         {!isVideoLoaded && videoUrl && (
           <div className='absolute inset-0 flex items-center justify-center bg-black'>
-            <div className='text-white text-center'>
-              <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2'></div>
+            <div className='text-center text-white'>
+              <div className='mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-b-2 border-white'></div>
               <p>Loading video...</p>
             </div>
           </div>
@@ -116,7 +116,7 @@ export const CaptionPreview: React.FC<CaptionPreviewProps> = ({
         <video
           ref={videoRef}
           src={videoUrl}
-          className='w-full h-full object-contain bg-black'
+          className='h-full w-full bg-black object-contain'
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onPlay={handlePlay}
@@ -148,7 +148,7 @@ export const CaptionPreview: React.FC<CaptionPreviewProps> = ({
         )}
 
         {/* Video Controls Overlay */}
-        <div className='absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity pointer-events-none'>
+        <div className='pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity hover:opacity-100'>
           <button
             onClick={() => {
               if (videoRef.current) {
@@ -162,13 +162,13 @@ export const CaptionPreview: React.FC<CaptionPreviewProps> = ({
               }
               onPlayPause();
             }}
-            className='w-16 h-16 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors pointer-events-auto'
+            className='pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full bg-black/50 text-white transition-colors hover:bg-black/70'
             aria-label={isPlaying ? 'Pause video' : 'Play video'}
           >
             {isPlaying ? (
-              <Pause className='w-8 h-8' />
+              <Pause className='h-8 w-8' />
             ) : (
-              <Play className='w-8 h-8 ml-1' />
+              <Play className='ml-1 h-8 w-8' />
             )}
           </button>
         </div>
@@ -189,26 +189,26 @@ export const CaptionPreview: React.FC<CaptionPreviewProps> = ({
             }
             onPlayPause();
           }}
-          className='absolute bottom-4 left-4 w-12 h-12 bg-black/70 rounded-full flex items-center justify-center text-white hover:bg-black/90 transition-colors'
+          className='absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/70 text-white transition-colors hover:bg-black/90'
           aria-label={isPlaying ? 'Pause video' : 'Play video'}
         >
           {isPlaying ? (
-            <Pause className='w-6 h-6' />
+            <Pause className='h-6 w-6' />
           ) : (
-            <Play className='w-6 h-6 ml-1' />
+            <Play className='ml-1 h-6 w-6' />
           )}
         </button>
 
         {/* Mute Button */}
         <button
           onClick={onMuteToggle}
-          className='absolute top-4 right-4 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors'
+          className='absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white transition-colors hover:bg-black/70'
           aria-label={isMuted ? 'Unmute video' : 'Mute video'}
         >
           {isMuted ? (
-            <VolumeX className='w-4 h-4' />
+            <VolumeX className='h-4 w-4' />
           ) : (
-            <Volume2 className='w-4 h-4' />
+            <Volume2 className='h-4 w-4' />
           )}
         </button>
       </div>
@@ -226,7 +226,7 @@ export const CaptionPreview: React.FC<CaptionPreviewProps> = ({
           max={videoDuration || 0}
           value={currentTime}
           onChange={handleSeek}
-          className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider'
+          className='slider h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200'
           style={{
             background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
               (currentTime / (videoDuration || 1)) * 100
@@ -243,8 +243,8 @@ export const CaptionPreview: React.FC<CaptionPreviewProps> = ({
       {/* Caption List */}
       {captions.length > 0 && (
         <div className='mt-4'>
-          <h4 className='text-sm font-medium text-gray-900 mb-2'>Captions</h4>
-          <div className='max-h-32 overflow-y-auto space-y-1'>
+          <h4 className='mb-2 text-sm font-medium text-gray-900'>Captions</h4>
+          <div className='max-h-32 space-y-1 overflow-y-auto'>
             {captions.map((caption, index) => (
               <div
                 key={index}
@@ -268,17 +268,6 @@ export const CaptionPreview: React.FC<CaptionPreviewProps> = ({
           </div>
         </div>
       )}
-
-      {/* Debug Info */}
-      <div className='mt-4 p-3 bg-gray-100 rounded-lg text-xs'>
-        <div className='font-medium mb-2'>Debug Info:</div>
-        <div>Video URL: {videoUrl ? 'Set' : 'Not set'}</div>
-        <div>Video Loaded: {isVideoLoaded ? 'Yes' : 'No'}</div>
-        <div>Duration: {videoDuration}s</div>
-        <div>Current Time: {currentTime}s</div>
-        <div>Is Playing: {isPlaying ? 'Yes' : 'No'}</div>
-        <div>Captions: {captions.length}</div>
-      </div>
     </div>
   );
 };
